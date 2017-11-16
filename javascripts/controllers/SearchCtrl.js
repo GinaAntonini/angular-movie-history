@@ -45,6 +45,6 @@ $scope.saveWishlist = (tmdbMovie) => {
     });
 };
 
-});
 
+});
 
