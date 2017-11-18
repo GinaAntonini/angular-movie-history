@@ -24,6 +24,18 @@ const getMovies = () => {
    	}).catch((err) => {
    		console.log("error in deleteMovie", err);
    	});
+
+      $scope.switchWatched = (movie) => {
+         console.log("hello");
+         movie.isWatched = true;
+         let updatedMovie = MovieService.createMovieObject(movie);
+         console.log(updatedMovie);
+         MovieService.updateMovie(updatedMovie, movie.id).then((result) => {
+            getMovies();
+         }).catch((err) => {
+            console.log("error in updateMovie", err);
+         });
+      };
    };
 });
 
