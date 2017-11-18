@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller("RatedCtrl", function($rootScope, $scope, MovieService){
+app.controller("RatedCtrl", function($location, $rootScope, $scope, MovieService){
 	$scope.movies = [];
 
 	const getMovies = () => {
@@ -26,5 +26,23 @@ app.controller("RatedCtrl", function($rootScope, $scope, MovieService){
    	}).catch((err) => {
    		console.log("error in deleteMovie", err);
    	});
+   };
+
+   $scope.starChange = (event, movie) =>{
+	   console.log("$event", event.rating);
+	   console.log("movie", movie);
+	   if(event.rating){
+		   movie.rating = event.rating;
+		   let updatedMovie = MovieService.createMovieObject(movie);
+		   MovieService.updateMovie(updatedMovie, movie.id).then(() => {
+			getMovies();
+		   }).catch((err) => {
+				console.log("error in updateMovie", err);
+		   });
+	   }
+   };
+
+   $scope.movieDetail = (movieId) => {
+	   $location.path(`/movie/${movieId}`);
    };
 });
