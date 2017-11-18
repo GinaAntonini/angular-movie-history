@@ -66,5 +66,10 @@ app.config(function($routeProvider){
       controller: 'RatedCtrl',
       resolve: {isAuth}
     })
+    .when("/movie/:id", {
+      templateUrl: 'partials/moviedetails.html',
+      controller: 'MovieDetailCtrl',
+      resolve: {isAuth}
+    })
     .otherwise('/auth');
 });
